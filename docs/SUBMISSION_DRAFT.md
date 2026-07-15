@@ -8,6 +8,8 @@
 
 **Public repository:** https://github.com/Peanuts1605/done-yet
 
+**Public demo video:** https://youtu.be/fCkm2LJgihE
+
 ## Inspiration
 
 Agent transcripts are useful for understanding what an agent attempted, but a confident completion message is not proof that the requested outcome happened. A refund can post while its helpdesk ticket stays open. A retry after a timeout can create a duplicate. The wrong record can change while the agent still says "done."
@@ -61,8 +63,8 @@ The useful boundary is not agent versus human. It is interpretation versus obser
 
 The next responsible step is not a larger dashboard. It is a small adapter interface for reading canonical state from real developer systems while preserving the same contract and verdict semantics. Production connectors, cryptographic attestation, and universal agent evaluation are outside this Build Week proof.
 
-## Submission evidence still to attach
+## Submission values
 
-- Public YouTube demo, no longer than three minutes, with voiceover
-- Codex `/feedback` session ID
-- Final Devpost screenshots
+- Public YouTube demo: https://youtu.be/fCkm2LJgihE
+- Codex `/feedback` session ID: `019ee0dc-d43c-7160-82ca-0cf8120952a8`
+- Final desktop screenshot: `docs/design/renders/done-yet-console-desktop-1440-full.png`

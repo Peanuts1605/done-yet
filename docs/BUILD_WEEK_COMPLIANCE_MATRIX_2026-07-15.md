@@ -16,7 +16,7 @@ Verified against the official rules and FAQ on July 15, 2026.
 | Requirement | Evidence | Status |
 | --- | --- | --- |
 | Text description | `docs/SUBMISSION_DRAFT.md` | Ready |
-| Public YouTube demo under three minutes | The 108.309-second video is uploaded and processed, currently private. | Needs publication |
+| Public YouTube demo under three minutes | The 108.309-second video is public at https://youtu.be/fCkm2LJgihE and resolves through YouTube's unauthenticated oEmbed endpoint. | Ready |
 | Demo audio covers the build, Codex, and GPT-5.6 | `demo/voiceover.txt` names the Codex plugin and explains the GPT-5.6 interpretation boundary. | Ready |
 | Public repository with relevant licensing | https://github.com/Peanuts1605/done-yet | Ready |
 | README explains setup, testing, Codex collaboration, and GPT-5.6 | `README.md` | Ready |
@@ -36,7 +36,7 @@ Verified against the official rules and FAQ on July 15, 2026.
 
 ## Final gate
 
-Submission can proceed as soon as the YouTube draft is published, the Devpost eligibility facts are completed, the recorded session ID is pasted, and the final form is reviewed and submitted.
+Submission can proceed as soon as the Devpost eligibility facts are completed, the recorded session ID and public video are pasted, and the final form is reviewed and submitted.
 
 ## Official sources
 

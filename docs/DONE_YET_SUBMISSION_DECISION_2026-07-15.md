@@ -16,7 +16,7 @@ Done Yet? does not score agent confidence or claim universal trust. It checks wh
 
 - Public console: https://done-yet.pages.dev/
 - Public repository: https://github.com/Peanuts1605/done-yet
-- YouTube private draft: https://youtu.be/fCkm2LJgihE
+- Public YouTube demo: https://youtu.be/fCkm2LJgihE
 - Final local video: `demo/video/done-yet-build-week-captioned.mp4`
 - Video SHA-256: `0ccc847d80f128c90af8eb95cd688d9779e3906f88767b56bae4c0a5d6ae22cc`
 - Repository head: `4e83484`
@@ -27,10 +27,9 @@ Done Yet? does not score agent confidence or claim universal trust. It checks wh
 
 The entry is ready to submit but is not yet submitted. Remaining external actions are:
 
-1. publish the staged YouTube video;
-2. finish Devpost eligibility fields with the owner's location and birth month/year;
-3. attach the YouTube URL and Codex session ID;
-4. reconcile Fulcro/Claude's independent review when it arrives;
-5. submit the final Devpost form.
+1. finish Devpost eligibility fields with the owner's location and birth month/year;
+2. attach the public YouTube URL and Codex session ID;
+3. reconcile Fulcro/Claude's independent review when it arrives;
+4. submit the final Devpost form.
 
 Optional Forge isolation and GitHub Actions must not delay submission.

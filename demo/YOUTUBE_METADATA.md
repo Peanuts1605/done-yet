@@ -30,10 +30,12 @@ No, this video is not made for kids.
 
 The thumbnail uses the actual public verifier UI and the canonical `FAIL 9/11` partial-commit result.
 
+Custom thumbnail upload is staged but requires one-time phone verification on the YouTube channel. The public video currently uses an auto-generated thumbnail.
+
 ## Visibility
 
-Public after final review.
+Public. Published July 15, 2026.
 
-## Current private draft
+## Public release
 
 https://youtu.be/fCkm2LJgihE

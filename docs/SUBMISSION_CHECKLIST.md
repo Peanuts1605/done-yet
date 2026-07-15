@@ -22,7 +22,7 @@
 - [x] Record and caption the 1:48 demo using `docs/DEMO_SCRIPT.md`
 - [x] Upload the final MP4 to YouTube as a private draft
 - [x] Prepare a 1280x720 product-based YouTube thumbnail
-- [ ] Upload the final video publicly to YouTube
+- [x] Publish the final video publicly: https://youtu.be/fCkm2LJgihE
 - [ ] Attach the public YouTube URL to Devpost
 - [x] Verify and document the primary build Session ID as `019ee0dc-d43c-7160-82ca-0cf8120952a8`
 - [ ] Paste the recorded Session ID into the Devpost `/feedback` field
@@ -33,6 +33,7 @@
 ## Independent review and optional polish
 
 - [ ] Reconcile Fulcro/Claude's actual GO/PIVOT response when it arrives
+- [ ] Add the prepared custom thumbnail after YouTube phone verification; do not delay submission for it
 - [ ] Retry isolated Forge validation when an authorized SSH identity is available
 - [ ] Add GitHub Actions only if the authenticated GitHub token gains `workflow` scope
 

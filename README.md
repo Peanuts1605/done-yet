@@ -4,6 +4,8 @@
 
 **Live judge console:** https://done-yet.pages.dev/
 
+**Watch the 1:49 demo:** https://youtu.be/fCkm2LJgihE
+
 Agents are good at reporting what they attempted. That is not always the same as proving what happened. Done Yet? is a Codex developer tool for workflows that change files, records, or services. It turns the intended result into an executable acceptance contract, observes the resulting state, and returns `PASS`, `FAIL`, or `HOLD` with the checks behind the verdict.
 
 ![Done Yet? judge console showing a partial refund commit](docs/design/renders/done-yet-console-desktop-1440-full.png)
