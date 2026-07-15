@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.DS_Store
+.done-yet/reports/
+.tmp/
+.playwright-cli/
+.wrangler/
+coverage/
+*.log

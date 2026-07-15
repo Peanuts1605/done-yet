@@ -1,0 +1,13 @@
+{
+  "orders": {
+    "ORD-17": { "id": "ORD-17", "customerId": "CUS-17", "total": 42, "status": "paid" },
+    "ORD-99": { "id": "ORD-99", "customerId": "CUS-99", "total": 84, "status": "refunded" }
+  },
+  "helpdesk": {
+    "tickets": {
+      "TKT-17": { "id": "TKT-17", "orderId": "ORD-17", "status": "closed", "identityVerified": true, "refundId": "REF-17" },
+      "TKT-99": { "id": "TKT-99", "orderId": "ORD-99", "status": "open", "identityVerified": false, "refundId": null }
+    }
+  },
+  "ledger": { "refunds": { "REF-17": { "id": "REF-17", "orderId": "ORD-99", "amount": 42, "status": "posted" } } }
+}

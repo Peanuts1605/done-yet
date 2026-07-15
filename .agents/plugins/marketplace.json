@@ -1,0 +1,20 @@
+{
+  "name": "done-yet-lab",
+  "interface": {
+    "displayName": "Done Yet? Lab"
+  },
+  "plugins": [
+    {
+      "name": "done-yet",
+      "source": {
+        "source": "local",
+        "path": "./plugins/done-yet"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

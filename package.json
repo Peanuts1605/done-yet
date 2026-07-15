@@ -1,0 +1,26 @@
+{
+  "name": "done-yet",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Postcondition checks for agents that say a task is done.",
+  "bin": {
+    "done-yet": "./bin/done-yet.mjs"
+  },
+  "scripts": {
+    "test": "node --test",
+    "lint": "node --check bin/done-yet.mjs && node --check engine/verifier.mjs && node --check engine/pointers.mjs && node --check plugins/done-yet/scripts/stop-guard.mjs",
+    "demo": "node ./bin/done-yet.mjs demo",
+    "console:data": "node ./scripts/build-console-data.mjs",
+    "console:dev": "npm --prefix apps/console run dev",
+    "console:build": "npm --prefix apps/console run build",
+    "console:lint": "npm --prefix apps/console run lint",
+    "check": "npm run lint && npm run console:lint && npm test && npm run console:build",
+    "verify:good": "node ./bin/done-yet.mjs verify ./fixtures/refund/contract.json ./fixtures/refund/before.json ./fixtures/refund/good/after.json --retry ./fixtures/refund/good/after-retry.json",
+    "verify:failures": "node ./bin/done-yet.mjs matrix"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

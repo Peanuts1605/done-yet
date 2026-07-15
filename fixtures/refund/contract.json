@@ -1,0 +1,73 @@
+{
+  "version": "done-yet.outcome-contract/v0.1",
+  "id": "refund-order-17",
+  "title": "Refund ORD-17 and close TKT-17 without collateral changes",
+  "checks": [
+    {
+      "id": "refund-exists",
+      "label": "Refund REF-17 exists",
+      "assertion": "exists",
+      "path": "/ledger/refunds/REF-17",
+      "expected": true
+    },
+    {
+      "id": "refund-order",
+      "label": "Refund targets ORD-17",
+      "assertion": "equals",
+      "path": "/ledger/refunds/REF-17/orderId",
+      "expected": "ORD-17"
+    },
+    {
+      "id": "refund-amount",
+      "label": "Refund amount is $42",
+      "assertion": "equals",
+      "path": "/ledger/refunds/REF-17/amount",
+      "expected": 42
+    },
+    {
+      "id": "single-refund",
+      "label": "Exactly one refund targets ORD-17",
+      "assertion": "count",
+      "path": "/ledger/refunds",
+      "where": { "orderId": "ORD-17" },
+      "expected": 1
+    },
+    {
+      "id": "ticket-closed",
+      "label": "TKT-17 is closed",
+      "assertion": "equals",
+      "path": "/helpdesk/tickets/TKT-17/status",
+      "expected": "closed"
+    },
+    {
+      "id": "ticket-links-refund",
+      "label": "TKT-17 references REF-17",
+      "assertion": "relation",
+      "path": "/helpdesk/tickets/TKT-17/refundId",
+      "equalsPath": "/ledger/refunds/REF-17/id"
+    },
+    {
+      "id": "identity-verified",
+      "label": "Customer identity remains verified",
+      "assertion": "equals",
+      "path": "/helpdesk/tickets/TKT-17/identityVerified",
+      "expected": true
+    },
+    {
+      "id": "unrelated-order-unchanged",
+      "label": "Unrelated order ORD-99 is unchanged",
+      "assertion": "unchanged",
+      "path": "/orders/ORD-99"
+    },
+    {
+      "id": "unrelated-ticket-unchanged",
+      "label": "Unrelated ticket TKT-99 is unchanged",
+      "assertion": "unchanged",
+      "path": "/helpdesk/tickets/TKT-99"
+    }
+  ],
+  "retryStablePaths": [
+    "/ledger/refunds",
+    "/helpdesk/tickets/TKT-17"
+  ]
+}

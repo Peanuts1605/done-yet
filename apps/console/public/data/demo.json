@@ -1,0 +1,1890 @@
+{
+  "contract": {
+    "version": "done-yet.outcome-contract/v0.1",
+    "id": "refund-order-17",
+    "title": "Refund ORD-17 and close TKT-17 without collateral changes",
+    "checks": [
+      {
+        "id": "refund-exists",
+        "label": "Refund REF-17 exists",
+        "assertion": "exists",
+        "path": "/ledger/refunds/REF-17",
+        "expected": true
+      },
+      {
+        "id": "refund-order",
+        "label": "Refund targets ORD-17",
+        "assertion": "equals",
+        "path": "/ledger/refunds/REF-17/orderId",
+        "expected": "ORD-17"
+      },
+      {
+        "id": "refund-amount",
+        "label": "Refund amount is $42",
+        "assertion": "equals",
+        "path": "/ledger/refunds/REF-17/amount",
+        "expected": 42
+      },
+      {
+        "id": "single-refund",
+        "label": "Exactly one refund targets ORD-17",
+        "assertion": "count",
+        "path": "/ledger/refunds",
+        "where": {
+          "orderId": "ORD-17"
+        },
+        "expected": 1
+      },
+      {
+        "id": "ticket-closed",
+        "label": "TKT-17 is closed",
+        "assertion": "equals",
+        "path": "/helpdesk/tickets/TKT-17/status",
+        "expected": "closed"
+      },
+      {
+        "id": "ticket-links-refund",
+        "label": "TKT-17 references REF-17",
+        "assertion": "relation",
+        "path": "/helpdesk/tickets/TKT-17/refundId",
+        "equalsPath": "/ledger/refunds/REF-17/id"
+      },
+      {
+        "id": "identity-verified",
+        "label": "Customer identity remains verified",
+        "assertion": "equals",
+        "path": "/helpdesk/tickets/TKT-17/identityVerified",
+        "expected": true
+      },
+      {
+        "id": "unrelated-order-unchanged",
+        "label": "Unrelated order ORD-99 is unchanged",
+        "assertion": "unchanged",
+        "path": "/orders/ORD-99"
+      },
+      {
+        "id": "unrelated-ticket-unchanged",
+        "label": "Unrelated ticket TKT-99 is unchanged",
+        "assertion": "unchanged",
+        "path": "/helpdesk/tickets/TKT-99"
+      }
+    ],
+    "retryStablePaths": [
+      "/ledger/refunds",
+      "/helpdesk/tickets/TKT-17"
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "false-success",
+      "name": "False success",
+      "short": "Nothing committed",
+      "claim": "Refund and ticket closeout completed successfully.",
+      "insight": "The tool returned OK, but neither system changed.",
+      "before": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "paid"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {}
+        }
+      },
+      "after": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "paid"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {}
+        },
+        "actionResult": {
+          "status": "ok",
+          "message": "refund completed"
+        }
+      },
+      "retry": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "paid"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {}
+        }
+      },
+      "report": {
+        "version": "done-yet.outcome-report/v0.1",
+        "scenario": "false-success",
+        "verdict": "FAIL",
+        "summary": {
+          "passed": 5,
+          "failed": 6,
+          "held": 0,
+          "total": 11
+        },
+        "checks": [
+          {
+            "id": "refund-exists",
+            "label": "Refund REF-17 exists",
+            "assertion": "exists",
+            "path": "/ledger/refunds/REF-17",
+            "status": "FAIL",
+            "expected": true,
+            "actual": false
+          },
+          {
+            "id": "refund-order",
+            "label": "Refund targets ORD-17",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/orderId",
+            "status": "FAIL",
+            "expected": "ORD-17"
+          },
+          {
+            "id": "refund-amount",
+            "label": "Refund amount is $42",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/amount",
+            "status": "FAIL",
+            "expected": 42
+          },
+          {
+            "id": "single-refund",
+            "label": "Exactly one refund targets ORD-17",
+            "assertion": "count",
+            "path": "/ledger/refunds",
+            "status": "FAIL",
+            "expected": 1,
+            "actual": 0
+          },
+          {
+            "id": "ticket-closed",
+            "label": "TKT-17 is closed",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/status",
+            "status": "FAIL",
+            "expected": "closed",
+            "actual": "open"
+          },
+          {
+            "id": "ticket-links-refund",
+            "label": "TKT-17 references REF-17",
+            "assertion": "relation",
+            "path": "/helpdesk/tickets/TKT-17/refundId",
+            "status": "FAIL",
+            "expected": "values match",
+            "actual": {
+              "left": null
+            }
+          },
+          {
+            "id": "identity-verified",
+            "label": "Customer identity remains verified",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/identityVerified",
+            "status": "PASS",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "id": "unrelated-order-unchanged",
+            "label": "Unrelated order ORD-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/orders/ORD-99",
+            "status": "PASS",
+            "expected": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "paid"
+            },
+            "actual": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "paid"
+            }
+          },
+          {
+            "id": "unrelated-ticket-unchanged",
+            "label": "Unrelated ticket TKT-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/helpdesk/tickets/TKT-99",
+            "status": "PASS",
+            "expected": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            },
+            "actual": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          },
+          {
+            "id": "retry-stable:/ledger/refunds",
+            "label": "Retry leaves /ledger/refunds stable",
+            "assertion": "retry",
+            "path": "/ledger/refunds",
+            "status": "PASS",
+            "expected": {},
+            "actual": {}
+          },
+          {
+            "id": "retry-stable:/helpdesk/tickets/TKT-17",
+            "label": "Retry leaves /helpdesk/tickets/TKT-17 stable",
+            "assertion": "retry",
+            "path": "/helpdesk/tickets/TKT-17",
+            "status": "PASS",
+            "expected": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "actual": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            }
+          }
+        ],
+        "observed": {
+          "agentClaim": "Refund and ticket closeout completed successfully.",
+          "contractDigest": "sha256:736699496825c8cbcf0e1dd87f55baada150a07590a85e328132eb69ca996559",
+          "beforeDigest": "sha256:80f2cc065c55cd1df8b5906ff96c747f0efa61c65d077a582b1299bce8d67c29",
+          "afterDigest": "sha256:0cb1fb7edbcffb6175815eeb95d69557ef06bb3afa52225a5b126d7a6bb6d480",
+          "retryDigest": "sha256:80f2cc065c55cd1df8b5906ff96c747f0efa61c65d077a582b1299bce8d67c29"
+        },
+        "generatedAt": "2026-07-15T14:45:19.085Z"
+      }
+    },
+    {
+      "id": "partial-commit",
+      "name": "Partial commit",
+      "short": "Ticket left open",
+      "claim": "Refund ORD-17 for $42 has been issued as REF-17 and TKT-17 has been closed.",
+      "insight": "The refund exists, but TKT-17 is still open and not linked to it.",
+      "before": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "paid"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {}
+        }
+      },
+      "after": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "refunded"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {
+            "REF-17": {
+              "id": "REF-17",
+              "orderId": "ORD-17",
+              "amount": 42,
+              "status": "posted"
+            }
+          }
+        }
+      },
+      "retry": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "refunded"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {
+            "REF-17": {
+              "id": "REF-17",
+              "orderId": "ORD-17",
+              "amount": 42,
+              "status": "posted"
+            }
+          }
+        }
+      },
+      "report": {
+        "version": "done-yet.outcome-report/v0.1",
+        "scenario": "partial-commit",
+        "verdict": "FAIL",
+        "summary": {
+          "passed": 9,
+          "failed": 2,
+          "held": 0,
+          "total": 11
+        },
+        "checks": [
+          {
+            "id": "refund-exists",
+            "label": "Refund REF-17 exists",
+            "assertion": "exists",
+            "path": "/ledger/refunds/REF-17",
+            "status": "PASS",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "id": "refund-order",
+            "label": "Refund targets ORD-17",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/orderId",
+            "status": "PASS",
+            "expected": "ORD-17",
+            "actual": "ORD-17"
+          },
+          {
+            "id": "refund-amount",
+            "label": "Refund amount is $42",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/amount",
+            "status": "PASS",
+            "expected": 42,
+            "actual": 42
+          },
+          {
+            "id": "single-refund",
+            "label": "Exactly one refund targets ORD-17",
+            "assertion": "count",
+            "path": "/ledger/refunds",
+            "status": "PASS",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "id": "ticket-closed",
+            "label": "TKT-17 is closed",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/status",
+            "status": "FAIL",
+            "expected": "closed",
+            "actual": "open"
+          },
+          {
+            "id": "ticket-links-refund",
+            "label": "TKT-17 references REF-17",
+            "assertion": "relation",
+            "path": "/helpdesk/tickets/TKT-17/refundId",
+            "status": "FAIL",
+            "expected": "values match",
+            "actual": {
+              "left": null,
+              "right": "REF-17"
+            }
+          },
+          {
+            "id": "identity-verified",
+            "label": "Customer identity remains verified",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/identityVerified",
+            "status": "PASS",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "id": "unrelated-order-unchanged",
+            "label": "Unrelated order ORD-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/orders/ORD-99",
+            "status": "PASS",
+            "expected": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "paid"
+            },
+            "actual": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "paid"
+            }
+          },
+          {
+            "id": "unrelated-ticket-unchanged",
+            "label": "Unrelated ticket TKT-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/helpdesk/tickets/TKT-99",
+            "status": "PASS",
+            "expected": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            },
+            "actual": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          },
+          {
+            "id": "retry-stable:/ledger/refunds",
+            "label": "Retry leaves /ledger/refunds stable",
+            "assertion": "retry",
+            "path": "/ledger/refunds",
+            "status": "PASS",
+            "expected": {
+              "REF-17": {
+                "id": "REF-17",
+                "orderId": "ORD-17",
+                "amount": 42,
+                "status": "posted"
+              }
+            },
+            "actual": {
+              "REF-17": {
+                "id": "REF-17",
+                "orderId": "ORD-17",
+                "amount": 42,
+                "status": "posted"
+              }
+            }
+          },
+          {
+            "id": "retry-stable:/helpdesk/tickets/TKT-17",
+            "label": "Retry leaves /helpdesk/tickets/TKT-17 stable",
+            "assertion": "retry",
+            "path": "/helpdesk/tickets/TKT-17",
+            "status": "PASS",
+            "expected": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "actual": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            }
+          }
+        ],
+        "observed": {
+          "agentClaim": "Refund ORD-17 for $42 has been issued as REF-17 and TKT-17 has been closed.",
+          "contractDigest": "sha256:736699496825c8cbcf0e1dd87f55baada150a07590a85e328132eb69ca996559",
+          "beforeDigest": "sha256:80f2cc065c55cd1df8b5906ff96c747f0efa61c65d077a582b1299bce8d67c29",
+          "afterDigest": "sha256:8274fa6d19a3bb8c1149acbf20a7c5935e7aa9fb84a5eda0ba5f4ad9ac911244",
+          "retryDigest": "sha256:8274fa6d19a3bb8c1149acbf20a7c5935e7aa9fb84a5eda0ba5f4ad9ac911244"
+        },
+        "generatedAt": "2026-07-15T14:45:19.087Z"
+      }
+    },
+    {
+      "id": "wrong-target",
+      "name": "Wrong target",
+      "short": "ORD-99 changed",
+      "claim": "ORD-17 was refunded and its ticket was closed.",
+      "insight": "The refund points to ORD-99, and the unrelated order changed.",
+      "before": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "paid"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {}
+        }
+      },
+      "after": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "paid"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "refunded"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {
+            "REF-17": {
+              "id": "REF-17",
+              "orderId": "ORD-99",
+              "amount": 42,
+              "status": "posted"
+            }
+          }
+        }
+      },
+      "retry": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "paid"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "refunded"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {
+            "REF-17": {
+              "id": "REF-17",
+              "orderId": "ORD-99",
+              "amount": 42,
+              "status": "posted"
+            }
+          }
+        }
+      },
+      "report": {
+        "version": "done-yet.outcome-report/v0.1",
+        "scenario": "wrong-target",
+        "verdict": "FAIL",
+        "summary": {
+          "passed": 8,
+          "failed": 3,
+          "held": 0,
+          "total": 11
+        },
+        "checks": [
+          {
+            "id": "refund-exists",
+            "label": "Refund REF-17 exists",
+            "assertion": "exists",
+            "path": "/ledger/refunds/REF-17",
+            "status": "PASS",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "id": "refund-order",
+            "label": "Refund targets ORD-17",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/orderId",
+            "status": "FAIL",
+            "expected": "ORD-17",
+            "actual": "ORD-99"
+          },
+          {
+            "id": "refund-amount",
+            "label": "Refund amount is $42",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/amount",
+            "status": "PASS",
+            "expected": 42,
+            "actual": 42
+          },
+          {
+            "id": "single-refund",
+            "label": "Exactly one refund targets ORD-17",
+            "assertion": "count",
+            "path": "/ledger/refunds",
+            "status": "FAIL",
+            "expected": 1,
+            "actual": 0
+          },
+          {
+            "id": "ticket-closed",
+            "label": "TKT-17 is closed",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/status",
+            "status": "PASS",
+            "expected": "closed",
+            "actual": "closed"
+          },
+          {
+            "id": "ticket-links-refund",
+            "label": "TKT-17 references REF-17",
+            "assertion": "relation",
+            "path": "/helpdesk/tickets/TKT-17/refundId",
+            "status": "PASS",
+            "expected": "values match",
+            "actual": {
+              "left": "REF-17",
+              "right": "REF-17"
+            }
+          },
+          {
+            "id": "identity-verified",
+            "label": "Customer identity remains verified",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/identityVerified",
+            "status": "PASS",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "id": "unrelated-order-unchanged",
+            "label": "Unrelated order ORD-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/orders/ORD-99",
+            "status": "FAIL",
+            "expected": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "paid"
+            },
+            "actual": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "refunded"
+            }
+          },
+          {
+            "id": "unrelated-ticket-unchanged",
+            "label": "Unrelated ticket TKT-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/helpdesk/tickets/TKT-99",
+            "status": "PASS",
+            "expected": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            },
+            "actual": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          },
+          {
+            "id": "retry-stable:/ledger/refunds",
+            "label": "Retry leaves /ledger/refunds stable",
+            "assertion": "retry",
+            "path": "/ledger/refunds",
+            "status": "PASS",
+            "expected": {
+              "REF-17": {
+                "id": "REF-17",
+                "orderId": "ORD-99",
+                "amount": 42,
+                "status": "posted"
+              }
+            },
+            "actual": {
+              "REF-17": {
+                "id": "REF-17",
+                "orderId": "ORD-99",
+                "amount": 42,
+                "status": "posted"
+              }
+            }
+          },
+          {
+            "id": "retry-stable:/helpdesk/tickets/TKT-17",
+            "label": "Retry leaves /helpdesk/tickets/TKT-17 stable",
+            "assertion": "retry",
+            "path": "/helpdesk/tickets/TKT-17",
+            "status": "PASS",
+            "expected": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            },
+            "actual": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            }
+          }
+        ],
+        "observed": {
+          "agentClaim": "ORD-17 was refunded and its ticket was closed.",
+          "contractDigest": "sha256:736699496825c8cbcf0e1dd87f55baada150a07590a85e328132eb69ca996559",
+          "beforeDigest": "sha256:80f2cc065c55cd1df8b5906ff96c747f0efa61c65d077a582b1299bce8d67c29",
+          "afterDigest": "sha256:6d8c886a614b19378c3cd14c91b34586d809a3ab123f4d46a4f28d45a8f4354d",
+          "retryDigest": "sha256:6d8c886a614b19378c3cd14c91b34586d809a3ab123f4d46a4f28d45a8f4354d"
+        },
+        "generatedAt": "2026-07-15T14:45:19.087Z"
+      }
+    },
+    {
+      "id": "duplicate-retry",
+      "name": "Duplicate retry",
+      "short": "Second refund created",
+      "claim": "The retry was safe; the existing refund was reused.",
+      "insight": "The first run looks correct, but retry creates REF-18 and relinks the ticket.",
+      "before": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "paid"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {}
+        }
+      },
+      "after": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "refunded"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {
+            "REF-17": {
+              "id": "REF-17",
+              "orderId": "ORD-17",
+              "amount": 42,
+              "status": "posted"
+            }
+          }
+        }
+      },
+      "retry": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "refunded"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-18"
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {
+            "REF-17": {
+              "id": "REF-17",
+              "orderId": "ORD-17",
+              "amount": 42,
+              "status": "posted"
+            },
+            "REF-18": {
+              "id": "REF-18",
+              "orderId": "ORD-17",
+              "amount": 42,
+              "status": "posted"
+            }
+          }
+        }
+      },
+      "report": {
+        "version": "done-yet.outcome-report/v0.1",
+        "scenario": "duplicate-retry",
+        "verdict": "FAIL",
+        "summary": {
+          "passed": 9,
+          "failed": 2,
+          "held": 0,
+          "total": 11
+        },
+        "checks": [
+          {
+            "id": "refund-exists",
+            "label": "Refund REF-17 exists",
+            "assertion": "exists",
+            "path": "/ledger/refunds/REF-17",
+            "status": "PASS",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "id": "refund-order",
+            "label": "Refund targets ORD-17",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/orderId",
+            "status": "PASS",
+            "expected": "ORD-17",
+            "actual": "ORD-17"
+          },
+          {
+            "id": "refund-amount",
+            "label": "Refund amount is $42",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/amount",
+            "status": "PASS",
+            "expected": 42,
+            "actual": 42
+          },
+          {
+            "id": "single-refund",
+            "label": "Exactly one refund targets ORD-17",
+            "assertion": "count",
+            "path": "/ledger/refunds",
+            "status": "PASS",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "id": "ticket-closed",
+            "label": "TKT-17 is closed",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/status",
+            "status": "PASS",
+            "expected": "closed",
+            "actual": "closed"
+          },
+          {
+            "id": "ticket-links-refund",
+            "label": "TKT-17 references REF-17",
+            "assertion": "relation",
+            "path": "/helpdesk/tickets/TKT-17/refundId",
+            "status": "PASS",
+            "expected": "values match",
+            "actual": {
+              "left": "REF-17",
+              "right": "REF-17"
+            }
+          },
+          {
+            "id": "identity-verified",
+            "label": "Customer identity remains verified",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/identityVerified",
+            "status": "PASS",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "id": "unrelated-order-unchanged",
+            "label": "Unrelated order ORD-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/orders/ORD-99",
+            "status": "PASS",
+            "expected": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "paid"
+            },
+            "actual": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "paid"
+            }
+          },
+          {
+            "id": "unrelated-ticket-unchanged",
+            "label": "Unrelated ticket TKT-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/helpdesk/tickets/TKT-99",
+            "status": "PASS",
+            "expected": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            },
+            "actual": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          },
+          {
+            "id": "retry-stable:/ledger/refunds",
+            "label": "Retry leaves /ledger/refunds stable",
+            "assertion": "retry",
+            "path": "/ledger/refunds",
+            "status": "FAIL",
+            "expected": {
+              "REF-17": {
+                "id": "REF-17",
+                "orderId": "ORD-17",
+                "amount": 42,
+                "status": "posted"
+              }
+            },
+            "actual": {
+              "REF-17": {
+                "id": "REF-17",
+                "orderId": "ORD-17",
+                "amount": 42,
+                "status": "posted"
+              },
+              "REF-18": {
+                "id": "REF-18",
+                "orderId": "ORD-17",
+                "amount": 42,
+                "status": "posted"
+              }
+            }
+          },
+          {
+            "id": "retry-stable:/helpdesk/tickets/TKT-17",
+            "label": "Retry leaves /helpdesk/tickets/TKT-17 stable",
+            "assertion": "retry",
+            "path": "/helpdesk/tickets/TKT-17",
+            "status": "FAIL",
+            "expected": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            },
+            "actual": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-18"
+            }
+          }
+        ],
+        "observed": {
+          "agentClaim": "The retry was safe; the existing refund was reused.",
+          "contractDigest": "sha256:736699496825c8cbcf0e1dd87f55baada150a07590a85e328132eb69ca996559",
+          "beforeDigest": "sha256:80f2cc065c55cd1df8b5906ff96c747f0efa61c65d077a582b1299bce8d67c29",
+          "afterDigest": "sha256:f5eb90c190bed63e1a356e3733cd02bae52b5330f53983c61ac49688ae4ac4c3",
+          "retryDigest": "sha256:321e9ec8a4c3830f2903558c6cc91894c510bfa38aad6570566435df0bc7d397"
+        },
+        "generatedAt": "2026-07-15T14:45:19.087Z"
+      }
+    },
+    {
+      "id": "timeout-after-commit",
+      "name": "Timeout after commit",
+      "short": "State is correct",
+      "claim": "The upstream call timed out, so completion is uncertain.",
+      "insight": "The call timed out, but the ticket, ledger, and retry state are correct.",
+      "before": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "paid"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {}
+        }
+      },
+      "after": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "refunded"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {
+            "REF-17": {
+              "id": "REF-17",
+              "orderId": "ORD-17",
+              "amount": 42,
+              "status": "posted"
+            }
+          }
+        },
+        "actionResult": {
+          "status": "timeout",
+          "message": "upstream request timed out"
+        }
+      },
+      "retry": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "refunded"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {
+            "REF-17": {
+              "id": "REF-17",
+              "orderId": "ORD-17",
+              "amount": 42,
+              "status": "posted"
+            }
+          }
+        },
+        "actionResult": {
+          "status": "ok",
+          "message": "already completed"
+        }
+      },
+      "report": {
+        "version": "done-yet.outcome-report/v0.1",
+        "scenario": "timeout-after-commit",
+        "verdict": "PASS",
+        "summary": {
+          "passed": 11,
+          "failed": 0,
+          "held": 0,
+          "total": 11
+        },
+        "checks": [
+          {
+            "id": "refund-exists",
+            "label": "Refund REF-17 exists",
+            "assertion": "exists",
+            "path": "/ledger/refunds/REF-17",
+            "status": "PASS",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "id": "refund-order",
+            "label": "Refund targets ORD-17",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/orderId",
+            "status": "PASS",
+            "expected": "ORD-17",
+            "actual": "ORD-17"
+          },
+          {
+            "id": "refund-amount",
+            "label": "Refund amount is $42",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/amount",
+            "status": "PASS",
+            "expected": 42,
+            "actual": 42
+          },
+          {
+            "id": "single-refund",
+            "label": "Exactly one refund targets ORD-17",
+            "assertion": "count",
+            "path": "/ledger/refunds",
+            "status": "PASS",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "id": "ticket-closed",
+            "label": "TKT-17 is closed",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/status",
+            "status": "PASS",
+            "expected": "closed",
+            "actual": "closed"
+          },
+          {
+            "id": "ticket-links-refund",
+            "label": "TKT-17 references REF-17",
+            "assertion": "relation",
+            "path": "/helpdesk/tickets/TKT-17/refundId",
+            "status": "PASS",
+            "expected": "values match",
+            "actual": {
+              "left": "REF-17",
+              "right": "REF-17"
+            }
+          },
+          {
+            "id": "identity-verified",
+            "label": "Customer identity remains verified",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/identityVerified",
+            "status": "PASS",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "id": "unrelated-order-unchanged",
+            "label": "Unrelated order ORD-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/orders/ORD-99",
+            "status": "PASS",
+            "expected": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "paid"
+            },
+            "actual": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "paid"
+            }
+          },
+          {
+            "id": "unrelated-ticket-unchanged",
+            "label": "Unrelated ticket TKT-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/helpdesk/tickets/TKT-99",
+            "status": "PASS",
+            "expected": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            },
+            "actual": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          },
+          {
+            "id": "retry-stable:/ledger/refunds",
+            "label": "Retry leaves /ledger/refunds stable",
+            "assertion": "retry",
+            "path": "/ledger/refunds",
+            "status": "PASS",
+            "expected": {
+              "REF-17": {
+                "id": "REF-17",
+                "orderId": "ORD-17",
+                "amount": 42,
+                "status": "posted"
+              }
+            },
+            "actual": {
+              "REF-17": {
+                "id": "REF-17",
+                "orderId": "ORD-17",
+                "amount": 42,
+                "status": "posted"
+              }
+            }
+          },
+          {
+            "id": "retry-stable:/helpdesk/tickets/TKT-17",
+            "label": "Retry leaves /helpdesk/tickets/TKT-17 stable",
+            "assertion": "retry",
+            "path": "/helpdesk/tickets/TKT-17",
+            "status": "PASS",
+            "expected": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            },
+            "actual": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            }
+          }
+        ],
+        "observed": {
+          "agentClaim": "The upstream call timed out, so completion is uncertain.",
+          "contractDigest": "sha256:736699496825c8cbcf0e1dd87f55baada150a07590a85e328132eb69ca996559",
+          "beforeDigest": "sha256:80f2cc065c55cd1df8b5906ff96c747f0efa61c65d077a582b1299bce8d67c29",
+          "afterDigest": "sha256:a4c1329e0c0fc8ef754fcbd3320c2474b33cc463d2354ccbd9cedb9bdd4ea03c",
+          "retryDigest": "sha256:09fc290a8df1ed51f8107aaa185708e2974071840d40eb8658c1f1404415f92c"
+        },
+        "generatedAt": "2026-07-15T14:45:19.088Z"
+      }
+    },
+    {
+      "id": "good",
+      "name": "Repaired run",
+      "short": "All systems agree",
+      "claim": "ORD-17 is refunded, TKT-17 is closed, and retry is stable.",
+      "insight": "Ticket and ledger agree, unrelated records are untouched, and retry is stable.",
+      "before": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "paid"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "open",
+              "identityVerified": true,
+              "refundId": null
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {}
+        }
+      },
+      "after": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "refunded"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {
+            "REF-17": {
+              "id": "REF-17",
+              "orderId": "ORD-17",
+              "amount": 42,
+              "status": "posted"
+            }
+          }
+        }
+      },
+      "retry": {
+        "orders": {
+          "ORD-17": {
+            "id": "ORD-17",
+            "customerId": "CUS-17",
+            "total": 42,
+            "status": "refunded"
+          },
+          "ORD-99": {
+            "id": "ORD-99",
+            "customerId": "CUS-99",
+            "total": 84,
+            "status": "paid"
+          }
+        },
+        "helpdesk": {
+          "tickets": {
+            "TKT-17": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            },
+            "TKT-99": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          }
+        },
+        "ledger": {
+          "refunds": {
+            "REF-17": {
+              "id": "REF-17",
+              "orderId": "ORD-17",
+              "amount": 42,
+              "status": "posted"
+            }
+          }
+        }
+      },
+      "report": {
+        "version": "done-yet.outcome-report/v0.1",
+        "scenario": "good",
+        "verdict": "PASS",
+        "summary": {
+          "passed": 11,
+          "failed": 0,
+          "held": 0,
+          "total": 11
+        },
+        "checks": [
+          {
+            "id": "refund-exists",
+            "label": "Refund REF-17 exists",
+            "assertion": "exists",
+            "path": "/ledger/refunds/REF-17",
+            "status": "PASS",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "id": "refund-order",
+            "label": "Refund targets ORD-17",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/orderId",
+            "status": "PASS",
+            "expected": "ORD-17",
+            "actual": "ORD-17"
+          },
+          {
+            "id": "refund-amount",
+            "label": "Refund amount is $42",
+            "assertion": "equals",
+            "path": "/ledger/refunds/REF-17/amount",
+            "status": "PASS",
+            "expected": 42,
+            "actual": 42
+          },
+          {
+            "id": "single-refund",
+            "label": "Exactly one refund targets ORD-17",
+            "assertion": "count",
+            "path": "/ledger/refunds",
+            "status": "PASS",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "id": "ticket-closed",
+            "label": "TKT-17 is closed",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/status",
+            "status": "PASS",
+            "expected": "closed",
+            "actual": "closed"
+          },
+          {
+            "id": "ticket-links-refund",
+            "label": "TKT-17 references REF-17",
+            "assertion": "relation",
+            "path": "/helpdesk/tickets/TKT-17/refundId",
+            "status": "PASS",
+            "expected": "values match",
+            "actual": {
+              "left": "REF-17",
+              "right": "REF-17"
+            }
+          },
+          {
+            "id": "identity-verified",
+            "label": "Customer identity remains verified",
+            "assertion": "equals",
+            "path": "/helpdesk/tickets/TKT-17/identityVerified",
+            "status": "PASS",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "id": "unrelated-order-unchanged",
+            "label": "Unrelated order ORD-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/orders/ORD-99",
+            "status": "PASS",
+            "expected": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "paid"
+            },
+            "actual": {
+              "id": "ORD-99",
+              "customerId": "CUS-99",
+              "total": 84,
+              "status": "paid"
+            }
+          },
+          {
+            "id": "unrelated-ticket-unchanged",
+            "label": "Unrelated ticket TKT-99 is unchanged",
+            "assertion": "unchanged",
+            "path": "/helpdesk/tickets/TKT-99",
+            "status": "PASS",
+            "expected": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            },
+            "actual": {
+              "id": "TKT-99",
+              "orderId": "ORD-99",
+              "status": "open",
+              "identityVerified": false,
+              "refundId": null
+            }
+          },
+          {
+            "id": "retry-stable:/ledger/refunds",
+            "label": "Retry leaves /ledger/refunds stable",
+            "assertion": "retry",
+            "path": "/ledger/refunds",
+            "status": "PASS",
+            "expected": {
+              "REF-17": {
+                "id": "REF-17",
+                "orderId": "ORD-17",
+                "amount": 42,
+                "status": "posted"
+              }
+            },
+            "actual": {
+              "REF-17": {
+                "id": "REF-17",
+                "orderId": "ORD-17",
+                "amount": 42,
+                "status": "posted"
+              }
+            }
+          },
+          {
+            "id": "retry-stable:/helpdesk/tickets/TKT-17",
+            "label": "Retry leaves /helpdesk/tickets/TKT-17 stable",
+            "assertion": "retry",
+            "path": "/helpdesk/tickets/TKT-17",
+            "status": "PASS",
+            "expected": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            },
+            "actual": {
+              "id": "TKT-17",
+              "orderId": "ORD-17",
+              "status": "closed",
+              "identityVerified": true,
+              "refundId": "REF-17"
+            }
+          }
+        ],
+        "observed": {
+          "agentClaim": "ORD-17 is refunded, TKT-17 is closed, and retry is stable.",
+          "contractDigest": "sha256:736699496825c8cbcf0e1dd87f55baada150a07590a85e328132eb69ca996559",
+          "beforeDigest": "sha256:80f2cc065c55cd1df8b5906ff96c747f0efa61c65d077a582b1299bce8d67c29",
+          "afterDigest": "sha256:f5eb90c190bed63e1a356e3733cd02bae52b5330f53983c61ac49688ae4ac4c3",
+          "retryDigest": "sha256:f5eb90c190bed63e1a356e3733cd02bae52b5330f53983c61ac49688ae4ac4c3"
+        },
+        "generatedAt": "2026-07-15T14:45:19.088Z"
+      }
+    }
+  ]
+}

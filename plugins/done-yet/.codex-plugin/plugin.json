@@ -1,0 +1,18 @@
+{
+  "name": "done-yet",
+  "version": "0.1.0",
+  "description": "Check the resulting state before Codex says a task is done.",
+  "author": {
+    "name": "Naumio"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Done Yet",
+    "shortDescription": "Test the world an agent changed.",
+    "longDescription": "Done Yet turns an intended outcome into a reviewable contract, runs independent postcondition checks, and reports PASS, FAIL, or HOLD before closeout.",
+    "developerName": "Naumio",
+    "category": "Developer Tools",
+    "capabilities": ["Lifecycle hooks", "Acceptance contracts", "Postcondition checks"],
+    "defaultPrompt": "Create a Done Yet acceptance contract for this task, run its checks after the work, and only call the task complete when the result is PASS."
+  }
+}
