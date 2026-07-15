@@ -22,7 +22,7 @@ Verified against the official rules and FAQ on July 15, 2026.
 | README explains setup, testing, Codex collaboration, and GPT-5.6 | `README.md` | Ready |
 | Developer-tool installation instructions | The README documents Node.js setup and Codex plugin installation. | Ready |
 | Judge test path without rebuilding | https://done-yet.pages.dev/ exposes all six synthetic fixtures. | Ready |
-| `/feedback` Session ID | Primary build thread identified as `019ee0dc-d43c-7160-82ca-0cf8120952a8`; the explicit `/feedback` step still needs to be recorded. | Pending |
+| `/feedback` Session ID | Provider-authoritative primary build session verified as `019ee0dc-d43c-7160-82ca-0cf8120952a8`; provenance is recorded in `docs/CODEX_SESSION_PROOF_2026-07-15.md`. | Ready to paste |
 | Devpost registration and eligibility profile | Non-personal fields are staged. Location and birth month/year are missing. | Pending owner facts |
 
 ## Judge criteria
@@ -36,7 +36,7 @@ Verified against the official rules and FAQ on July 15, 2026.
 
 ## Final gate
 
-Submission can proceed as soon as the YouTube draft is published, the Devpost eligibility facts are completed, the session ID is entered, and the final form is reviewed and submitted.
+Submission can proceed as soon as the YouTube draft is published, the Devpost eligibility facts are completed, the recorded session ID is pasted, and the final form is reviewed and submitted.
 
 ## Official sources
 

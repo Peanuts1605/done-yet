@@ -19,6 +19,7 @@
 - Fulcro/Claude QA packet: `/Users/alfredthebot/Documents/New project/done-yet/docs/FULCRO_CLAUDE_QA_PACKET_2026-07-15.md`
 - YouTube metadata: `/Users/alfredthebot/Documents/New project/done-yet/demo/YOUTUBE_METADATA.md`
 - YouTube thumbnail: `/Users/alfredthebot/Documents/New project/done-yet/demo/thumbnail/done-yet-youtube-thumbnail.png`
+- Codex session proof: `/Users/alfredthebot/Documents/New project/done-yet/docs/CODEX_SESSION_PROOF_2026-07-15.md`
 
 ## Public proof
 
