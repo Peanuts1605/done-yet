@@ -7,3 +7,8 @@ dist/
 .wrangler/
 coverage/
 *.log
+demo/video/*.mp4
+demo/video/*.webm
+demo/video/*.aiff
+demo/video/*.wav
+demo/video/qa/

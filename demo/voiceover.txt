@@ -1,0 +1,15 @@
+An agent can sound completely certain and still leave the job half done. Done Yet? checks the systems after the agent says it is finished.
+
+This synthetic contract is specific: refund order seventeen for forty-two dollars, close and link ticket seventeen, leave unrelated records alone, and do not create a duplicate when the operation is retried.
+
+Here, the agent says the refund and ticket are complete. The ledger agrees about the refund, but the helpdesk does not. The ticket is still open and has no refund link. Done Yet? returns fail, nine of eleven, and names the two postconditions that disagree with the claim.
+
+Now look at the opposite case. The agent saw a timeout, which sounds like failure. But the canonical state is correct: one refund exists, the ticket is closed and linked, and unrelated records are unchanged. Done Yet? returns pass, eleven of eleven.
+
+Each result includes the contract, observed values, checks, and evidence digests. A judge can inspect the report or export the exact JSON.
+
+The public repository includes an opt-in Codex skill and Stop hook, so participating tasks cannot close without a current passing report. GPT-5.6 helps translate intent into typed checks and explain repairs. The model does not give itself a passing grade.
+
+This is not a universal trust score, and a hash does not make evidence true. It is a small, inspectable postcondition loop for work that changes real systems.
+
+The agent said done. Done Yet? checks the systems.
