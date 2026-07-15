@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
+import { snapshotFilesystem } from "../adapters/filesystem.mjs";
 import { verifyOutcome } from "../engine/verifier.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -78,6 +79,20 @@ async function runScenario(name) {
 
 async function main() {
   const [command = "demo", ...args] = process.argv.slice(2);
+
+  if (command === "snapshot") {
+    const includeText = args.includes("--text");
+    const positional = args.filter((value) => value !== "--text");
+    if (positional.length < 3) {
+      throw new Error("Usage: done-yet snapshot <root> <out> <path...> [--text]");
+    }
+    const [root, out, ...paths] = positional;
+    const snapshot = await snapshotFilesystem({ root, paths, includeText });
+    await mkdir(path.dirname(path.resolve(out)), { recursive: true });
+    await writeFile(path.resolve(out), `${JSON.stringify(snapshot, null, 2)}\n`);
+    console.log(`Observed ${paths.length} path${paths.length === 1 ? "" : "s"} into ${path.resolve(out)}`);
+    return;
+  }
 
   if (command === "verify") {
     const { positional, options } = parseOptions(args);

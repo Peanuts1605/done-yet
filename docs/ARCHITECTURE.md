@@ -29,7 +29,9 @@ flowchart LR
 
 ## Proof data flow
 
-The Build Week fixture is local JSON so every judge sees the same evidence. `scripts/build-console-data.mjs` invokes the same verifier used by the CLI and emits `apps/console/public/data/demo.json`; the React console does not carry a second verdict implementation.
+The zero-credential repository proof uses `adapters/filesystem.mjs` to read explicitly named relative paths from a live temporary workspace. It records file existence, type, byte count, digest, and optional UTF-8 text without following symlinks. `npm run demo:repo` proves both a false completion claim and a repaired, retry-stable edit against those observations.
+
+The adversarial business-system gallery remains local JSON so every judge sees the same evidence. `scripts/build-console-data.mjs` invokes the same verifier used by the CLI and emits `apps/console/public/data/demo.json`; the React console does not carry a second verdict implementation.
 
 `HOLD` has a precise meaning: a required contract or observation is unavailable. A failed assertion is `FAIL`, including wrong-target changes and non-idempotent retries.
 
@@ -41,4 +43,4 @@ The Build Week fixture is local JSON so every judge sees the same evidence. `scr
 - duplicate retry: an uncertain operation was repeated unsafely;
 - timeout ambiguity: the transport failed after the canonical commit succeeded.
 
-The current proof does not claim production connectors, cryptographic attestation, or universal agent evaluation. It demonstrates a small postcondition engine, a Codex integration point, and a judge-readable evidence surface.
+The current proof does not claim production service connectors, cryptographic attestation, or universal agent evaluation. It demonstrates a small postcondition engine, one real repository observer, a tested Codex closeout hook, and a judge-readable evidence surface.

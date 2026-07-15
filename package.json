@@ -9,8 +9,9 @@
   },
   "scripts": {
     "test": "node --test",
-    "lint": "node --check bin/done-yet.mjs && node --check engine/verifier.mjs && node --check engine/pointers.mjs && node --check plugins/done-yet/scripts/stop-guard.mjs",
+    "lint": "node --check bin/done-yet.mjs && node --check engine/verifier.mjs && node --check engine/pointers.mjs && node --check adapters/filesystem.mjs && node --check scripts/repository-adapter-demo.mjs && node --check plugins/done-yet/scripts/stop-guard.mjs",
     "demo": "node ./bin/done-yet.mjs demo",
+    "demo:repo": "node ./scripts/repository-adapter-demo.mjs",
     "console:data": "node ./scripts/build-console-data.mjs",
     "console:dev": "npm --prefix apps/console run dev",
     "console:build": "npm --prefix apps/console run build",

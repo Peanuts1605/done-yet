@@ -6,6 +6,7 @@ import { verifyOutcome } from "../engine/verifier.mjs";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const FIXTURES = path.join(ROOT, "fixtures", "refund");
 const OUTPUT = path.join(ROOT, "apps", "console", "public", "data", "demo.json");
+const DEMO_CAPTURED_AT = Date.parse("2026-07-15T14:45:19.000Z");
 
 const definitions = [
   { id: "false-success", name: "False success", short: "Nothing committed", claim: "Refund and ticket closeout completed successfully.", insight: "The tool returned OK, but neither system changed." },
@@ -31,12 +32,14 @@ for (const definition of definitions) {
     json(path.join(FIXTURES, definition.id, "after.json")),
     json(path.join(FIXTURES, definition.id, "after-retry.json")),
   ]);
+  const report = verifyOutcome({ contract, before, after, retry, agentClaim: definition.claim, scenario: definition.id });
+  report.generatedAt = new Date(DEMO_CAPTURED_AT + scenarios.length * 1000).toISOString();
   scenarios.push({
     ...definition,
     before,
     after,
     retry,
-    report: verifyOutcome({ contract, before, after, retry, agentClaim: definition.claim, scenario: definition.id }),
+    report,
   });
 }
 

@@ -1,0 +1,38 @@
+{
+  "version": "done-yet.outcome-contract/v0.1",
+  "id": "repository-release-status",
+  "title": "Mark the release ready without changing application configuration",
+  "checks": [
+    {
+      "id": "status-file-exists",
+      "label": "Release status file exists",
+      "assertion": "equals",
+      "path": "/files/docs~1STATUS.md/exists",
+      "expected": true
+    },
+    {
+      "id": "release-ready",
+      "label": "Release status is ready",
+      "assertion": "equals",
+      "path": "/files/docs~1STATUS.md/text",
+      "expected": "release: ready\n"
+    },
+    {
+      "id": "status-is-a-file",
+      "label": "Release status remains a file",
+      "assertion": "equals",
+      "path": "/files/docs~1STATUS.md/type",
+      "expected": "file"
+    },
+    {
+      "id": "config-unchanged",
+      "label": "Application configuration is unchanged",
+      "assertion": "unchanged",
+      "path": "/files/src~1config.js"
+    }
+  ],
+  "retryStablePaths": [
+    "/files/docs~1STATUS.md",
+    "/files/src~1config.js"
+  ]
+}
