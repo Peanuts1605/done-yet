@@ -18,6 +18,7 @@
 - [ ] Finish Devpost registration with truthful location and birth month/year
 - [ ] Request participant credits before July 17 at noon PT, if registration is eligible
 - [x] Record and caption the 1:48 demo using `docs/DEMO_SCRIPT.md`
+- [x] Upload the final MP4 to YouTube as a private draft
 - [ ] Upload the final video publicly to YouTube
 - [ ] Attach the public YouTube URL to Devpost
 - [ ] Run Codex `/feedback` and record the required session ID
