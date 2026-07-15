@@ -24,6 +24,12 @@ Built from scratch for OpenAI Build Week 2026 in the Developer Tools track.
 
 No, this video is not made for kids.
 
+## Thumbnail
+
+`demo/thumbnail/done-yet-youtube-thumbnail.png`
+
+The thumbnail uses the actual public verifier UI and the canonical `FAIL 9/11` partial-commit result.
+
 ## Visibility
 
 Public after final review.

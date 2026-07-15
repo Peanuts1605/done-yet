@@ -12,6 +12,8 @@
 - [x] Devpost submission copy drafted
 - [x] Demo voiceover and capture script drafted
 - [x] Actual Fulcro/Claude review requested with the live URL and repository
+- [x] Official rules/FAQ re-verified on July 15 in `docs/BUILD_WEEK_COMPLIANCE_MATRIX_2026-07-15.md`
+- [x] Actual Fulcro/Claude QA packet prepared in `docs/FULCRO_CLAUDE_QA_PACKET_2026-07-15.md`
 
 ## Required before submission
 
@@ -19,9 +21,11 @@
 - [ ] Request participant credits before July 17 at noon PT, if registration is eligible
 - [x] Record and caption the 1:48 demo using `docs/DEMO_SCRIPT.md`
 - [x] Upload the final MP4 to YouTube as a private draft
+- [x] Prepare a 1280x720 product-based YouTube thumbnail
 - [ ] Upload the final video publicly to YouTube
 - [ ] Attach the public YouTube URL to Devpost
 - [ ] Run Codex `/feedback` and record the required session ID
+- [x] Identify the primary build thread as `019ee0dc-d43c-7160-82ca-0cf8120952a8`
 - [ ] Add final screenshots to the Devpost project
 - [ ] Paste and proofread `docs/SUBMISSION_DRAFT.md`
 - [ ] Submit before July 21, 2026 at 5:00 PM PT

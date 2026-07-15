@@ -15,6 +15,10 @@
 - Video QA: `/Users/alfredthebot/Documents/New project/done-yet/docs/qa/VIDEO_QA_2026-07-15.md`
 - Final video: `/Users/alfredthebot/Documents/New project/done-yet/demo/video/done-yet-build-week-captioned.mp4`
 - Screenshot: `/Users/alfredthebot/Documents/New project/done-yet/docs/design/renders/done-yet-console-desktop-1440-full.png`
+- Compliance matrix: `/Users/alfredthebot/Documents/New project/done-yet/docs/BUILD_WEEK_COMPLIANCE_MATRIX_2026-07-15.md`
+- Fulcro/Claude QA packet: `/Users/alfredthebot/Documents/New project/done-yet/docs/FULCRO_CLAUDE_QA_PACKET_2026-07-15.md`
+- YouTube metadata: `/Users/alfredthebot/Documents/New project/done-yet/demo/YOUTUBE_METADATA.md`
+- YouTube thumbnail: `/Users/alfredthebot/Documents/New project/done-yet/demo/thumbnail/done-yet-youtube-thumbnail.png`
 
 ## Public proof
 
@@ -36,6 +40,9 @@
 - Video duration: 108.309 seconds
 - Video frame: 1920 by 1080
 - Video SHA-256: `0ccc847d80f128c90af8eb95cd688d9779e3906f88767b56bae4c0a5d6ae22cc`
+- Final `npm run check` rerun: passed on 2026-07-15
+- Thumbnail frame: 1280 by 720
+- Thumbnail SHA-256: `67d8ec8801c43b644171a3fb8de65eb9d4cd194e16da6e44b237ba0731ff8abc`
 
 ## Independent review
 
