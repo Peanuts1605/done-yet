@@ -79,6 +79,6 @@ That boundary is deliberate. Hashes identify captured evidence; they do not make
 
 ## Current support
 
-The proof is tested on macOS with Node.js 20+. GitHub Actions verifies the CLI, tests, plugin shape, and console build on Ubuntu. The data fixture is intentionally local and synthetic; production system adapters are outside this Build Week slice.
+The proof is tested on macOS with Node.js 20+. `npm run check` verifies the CLI, tests, plugin shape, and console build in one command. The data fixture is intentionally local and synthetic; production system adapters are outside this Build Week slice.
 
 Built from scratch for OpenAI Build Week on July 15, 2026.
