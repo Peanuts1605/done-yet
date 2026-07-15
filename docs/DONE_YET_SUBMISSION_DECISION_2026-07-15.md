@@ -4,7 +4,7 @@
 
 `PROCEED_TO_SUBMISSION`
 
-Done Yet? is a working, public, judgeable Developer Tools entry. Its narrow claim is supported by one deterministic verifier, six synthetic adversarial scenarios, an 11-check acceptance contract, a Codex plugin, and a public console.
+Done Yet? is a working, public, judgeable Developer Tools entry. Its narrow claim is supported by one deterministic verifier, a real workspace observer, a three-result live filesystem proof, six synthetic adversarial scenarios, a tested Codex closeout hook, and a public console.
 
 ## Product truth
 
@@ -19,8 +19,8 @@ Done Yet? does not score agent confidence or claim universal trust. It checks wh
 - Public YouTube demo: https://youtu.be/fCkm2LJgihE
 - Final local video: `demo/video/done-yet-build-week-captioned.mp4`
 - Video SHA-256: `0ccc847d80f128c90af8eb95cd688d9779e3906f88767b56bae4c0a5d6ae22cc`
-- Repository head: `4e83484`
-- Automated checks: 7 tests passed; root lint passed; console lint/build passed; plugin validation passed; Remotion lint passed; video decoded end to end.
+- Repository head: `efbea56`
+- Automated checks: 13 tests passed; root lint passed; console lint/build passed; repository demo produced `FAIL`, `FAIL`, then `PASS 6/6`; plugin validation passed; Remotion lint passed; video decoded end to end.
 - Public UI QA: all six scenario verdicts, contract filters, dialogs, copy, and export verified.
 
 ## Submission state

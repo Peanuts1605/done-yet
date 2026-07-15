@@ -20,19 +20,24 @@
 - YouTube metadata: `/Users/alfredthebot/Documents/New project/done-yet/demo/YOUTUBE_METADATA.md`
 - YouTube thumbnail: `/Users/alfredthebot/Documents/New project/done-yet/demo/thumbnail/done-yet-youtube-thumbnail.png`
 - Codex session proof: `/Users/alfredthebot/Documents/New project/done-yet/docs/CODEX_SESSION_PROOF_2026-07-15.md`
+- Judge red team: `/Users/alfredthebot/Documents/New project/done-yet/docs/research/BUILD_WEEK_JUDGE_RED_TEAM_2026-07-15.md`
 
 ## Public proof
 
 - Live console: https://done-yet.pages.dev/
 - GitHub: https://github.com/Peanuts1605/done-yet
 - Public YouTube demo: https://youtu.be/fCkm2LJgihE
-- Git commit: `4e83484`
+- Git commit: `efbea56`
 - Codex session ID: `019ee0dc-d43c-7160-82ca-0cf8120952a8`
 
 ## Checks
 
 - `npm run lint`: passed
-- `npm test`: 7 passed, 0 failed
+- `npm test`: 13 passed, 0 failed
+- Real workspace proof: no edit `FAIL`; correct file plus protected-config mutation `FAIL`; repaired retry-stable edit `PASS 6/6`
+- Filesystem observer traversal and symlink rejection: passed
+- CLI snapshot output and `PASS` / `FAIL` / `HOLD` exit-code tests: passed
+- Stop-hook lifecycle test: passed
 - Console lint and production build: passed
 - Public scenario matrix: passed
 - Public copy and export controls: passed
