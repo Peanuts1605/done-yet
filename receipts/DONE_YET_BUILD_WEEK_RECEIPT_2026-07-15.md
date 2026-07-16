@@ -31,6 +31,7 @@
 - Devpost submission ID: `1087865-done-yet`
 - Submitted: `2026-07-16T02:05:45Z`
 - Git commit: `efbea56`
+- Submission artifacts commit: `e94605e0f1cf13c31b7ffd96339a798f30937969`
 - Codex session ID: `019ee0dc-d43c-7160-82ca-0cf8120952a8`
 
 ## Checks
@@ -77,8 +78,9 @@ Fulcro is Claude. The live demo and repository were sent to Fulcro/Claude in Sla
 
 - Google Drive: `/Users/alfredthebot/Library/CloudStorage/GoogleDrive-maggytatiana@gmail.com/My Drive/TMN_NAUMIO_HQ/06_DELIVERY/MAG-DONE-YET-BUILD-WEEK-2026-07-15`
 - Notion: https://app.notion.com/p/39eb143d291781328efedfd0346ee4c4
-- Drive mirror update: 7 current artifact files copied and hash-verified on 2026-07-15
-- Notion readback: verified with the public video, real workspace proof, 13-test result, and pending Fulcro state
-- Shared closeout: `PENDING_FINAL_SUBMISSION_RECONCILIATION`
+- Drive mirror update: run `20260716T020809960Z`; 5 final closeout files copied and hash-verified on 2026-07-16
+- Drive manifest: `/Users/alfredthebot/Library/CloudStorage/GoogleDrive-maggytatiana@gmail.com/My Drive/TMN_NAUMIO_HQ/06_DELIVERY/MAG-DONE-YET-BUILD-WEEK-2026-07-15/MIRROR_MANIFEST.20260716T020809960Z.json`
+- Notion readback: verified on 2026-07-16 with status `SUBMITTED`, the Devpost URL, submission ID, post-submission checks, and verified Drive run
+- Shared closeout: `COMPLETE_SUBMITTED_STATE`
 
-The contest entry is submitted. Final shared closeout requires the updated artifact and receipt to be hash-verified in Drive, the Notion pointer to be patched with the Devpost submission, and this receipt to be re-mirrored after reconciliation.
+The contest entry is submitted and the final artifact, decision, local receipt, hash-verified Drive mirror, and Notion pointer agree. This reconciled receipt is re-mirrored after this patch.
