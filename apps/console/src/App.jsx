@@ -25,7 +25,10 @@ function AppHeader({ onExport }) {
   return (
     <header className="app-header">
       <div className="brand-group">
-        <div className="wordmark" aria-label="Done Yet?">Done Yet?</div>
+        <div className="brand-lockup">
+          <div className="wordmark" aria-label="Done Yet?">Done Yet?</div>
+          <p className="tagline">The agent said done. Done Yet? checks the systems.</p>
+        </div>
         <div className="header-divider" />
         <div className="fixture-switcher" title="Current demo fixture">Refund workflow</div>
         <span className="provenance"><Braces size={15} aria-hidden="true" /> Codex + GPT-5.6</span>
@@ -221,7 +224,7 @@ function LoadingState() {
 function App() {
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
-  const [selectedId, setSelectedId] = useState('partial-commit')
+  const [selectedId, setSelectedId] = useState('false-success')
   const [filter, setFilter] = useState('all')
   const [dialog, setDialog] = useState(null)
 

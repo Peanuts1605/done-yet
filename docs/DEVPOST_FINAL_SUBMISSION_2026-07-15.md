@@ -28,7 +28,7 @@ AI agents are becoming convincing narrators of their own work. They can say the 
 
 A refund can post while its helpdesk ticket stays open. A retry after a timeout can create a duplicate. The correct file can change while protected configuration changes with it.
 
-Done Yet? began with one practical question: **after the agent acts, do the systems now satisfy the user's actual acceptance criteria?**
+Done Yet? began with one practical question: **after the agent acts, do the systems now satisfy the user's actual acceptance criteria?** It is design by contract applied to agent side effects at the closeout boundary.
 
 ## What it does
 
@@ -54,7 +54,7 @@ npm install
 npm run demo:repo
 ```
 
-Then open the live judge console and choose **Partial commit**. The refund exists, but the ticket remains open and unlinked, so the result is `FAIL 9/11`.
+Then open the live judge console. It starts on **False success**: the agent confidently claims completion, but observed state is unchanged, so the result is `FAIL 5/11`.
 
 Choose **Timeout after commit** next. The transport reported an error, but canonical state satisfies all 11 checks, so the result is `PASS 11/11`.
 
@@ -66,7 +66,7 @@ One verification engine powers the CLI, tests, generated fixtures, filesystem ob
 
 A Codex plugin packages a `done-yet` skill and an opt-in `Stop` hook. In an armed project, Codex cannot close the task without a current passing report. Unrelated projects remain untouched.
 
-GPT-5.6 handles the semantic work: translating natural-language intent into a typed, reviewable contract and helping explain or repair failed checks. It does not award its own verdict. Explicit observations and deterministic checks do that.
+GPT-5.6 handles the semantic work: translating natural-language intent into a typed, human-diffable contract before execution and helping explain or repair failed checks. Explicit observations and deterministic checks award the verdict. Each report pins the contract digest, and the Stop hook rejects a contract edited after verification.
 
 Codex was used throughout the build: research, product narrowing, implementation, adversarial fixtures, tests, visual QA, deployment, and submission evidence. The primary build session is `019ee0dc-d43c-7160-82ca-0cf8120952a8`.
 
@@ -83,12 +83,14 @@ The filesystem observer also needed real boundaries. It reads only explicit rela
 - A real workspace proof catches false completion and collateral edits, then verifies a repaired, retry-stable result.
 - One deterministic 11-check contract catches four distinct business-workflow failure patterns.
 - The same engine powers the CLI, tests, plugin, generated evidence, and public console.
-- Thirteen automated tests cover the verifier, observer, CLI exit codes, and Codex hook lifecycle.
+- Nineteen automated tests cover the verifier, missing-evidence and malformed-contract paths, observer, CLI exit codes, and Codex hook lifecycle.
 - Six reproducible fixtures make the central claim judgeable in under two minutes.
 
 ## What we learned
 
 The useful boundary is not agent versus human. It is interpretation versus observation. Models are strong at turning intent into structure and helping people understand failures. Explicit checks are better at deciding whether known postconditions hold.
+
+An independent adversarial review found a path where missing observations could yield an unsupported result. We patched it to return `HOLD`, added regression tests, and kept the six shipped scenarios unchanged. A product about agents overclaiming completion should hold itself to the same standard.
 
 A tool response describes the trip. **Done is a property of the destination.**
 

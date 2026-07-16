@@ -13,8 +13,8 @@ Fulcro is Claude. This packet is a handoff for actual Fulcro QA; it is not a Ful
 
 ## Two-minute review
 
-1. Open **Partial commit** and confirm `FAIL 9/11`.
-2. Select **Failed only** and verify that ticket closure and refund linkage are the only two failed postconditions.
+1. Open **False success** and confirm `FAIL 5/11` against unchanged observed state.
+2. Open **Partial commit**, select **Failed only**, and verify that ticket closure and refund linkage are the only two failed postconditions.
 3. Open the contract and JSON evidence; confirm the verdict is inspectable rather than model-scored.
 4. Open **Timeout after commit** and confirm `PASS 11/11` despite the transport error.
 5. Try **Wrong target** and **Duplicate retry** to test collateral-mutation and idempotency checks.
@@ -36,6 +36,6 @@ Name only reproducible findings:
 
 - The public console and repository are live.
 - Automated checks and public interaction QA passed.
-- The 108.309-second demo is uploaded to YouTube and remains private pending publication.
-- Devpost registration still needs the entrant's location and birth month/year.
-- No Fulcro verdict is claimed until Claude responds.
+- The 108.309-second demo is public on YouTube.
+- The Devpost entry is submitted to OpenAI Build Week.
+- Fulcro returned `GO_WITH_PATCH` on 2026-07-16; the reproducible review is in `docs/FULCRO_QA_RESPONSE_2026-07-16.md`.

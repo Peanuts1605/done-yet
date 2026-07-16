@@ -6,9 +6,9 @@
 
 **Watch the 1:49 demo:** https://youtu.be/fCkm2LJgihE
 
-Agents are good at reporting what they attempted. That is not always the same as proving what happened. Done Yet? is a Codex developer tool for workflows that change files, records, or services. It turns the intended result into an executable acceptance contract, observes the resulting state, and returns `PASS`, `FAIL`, or `HOLD` with the checks behind the verdict.
+Agents are good at reporting what they attempted. That is not always the same as proving what happened. Done Yet? is design by contract applied to agent side effects at the closeout boundary. It turns the intended result into an executable acceptance contract, observes the resulting state, and returns `PASS`, `FAIL`, or `HOLD` with the checks behind the verdict.
 
-![Done Yet? judge console showing a partial refund commit](docs/design/renders/done-yet-console-desktop-1440-full.png)
+![Done Yet? judge console showing a false success caught by observed state](docs/design/renders/done-yet-console-desktop-1440-full.png)
 
 ## A real workspace proof
 
@@ -62,7 +62,7 @@ To use the interactive console:
 npm run console:dev
 ```
 
-Open `http://localhost:5173`, choose each scenario, switch between all and failed checks, inspect the contract, and export a result report.
+Open `http://localhost:5173`. The console starts on **False success**, where a confident completion claim meets unchanged state. Choose each scenario, switch between all and failed checks, inspect the contract, and export a result report.
 
 ## Codex plugin
 
@@ -79,14 +79,16 @@ The hook only enforces a report inside a project that contains an active `.done-
 
 ## Where GPT-5.6 fits
 
-Done Yet? separates judgment from measurement:
+Done Yet? separates interpretation from measurement:
 
-1. GPT-5.6 in Codex translates natural-language intent into a typed, reviewable contract and can propose a repair when a check fails.
+1. Before work begins, GPT-5.6 in Codex translates natural-language intent into a typed, human-diffable contract and can propose a repair when a check fails.
 2. The verifier runs explicit JSON-pointer assertions against observed before, after, and retry states.
 3. The deterministic check results produce `PASS`, `FAIL`, or `HOLD`; the model does not award itself a pass.
-4. The Codex `Stop` hook can prevent an opted-in task from closing without a current passing report.
+4. Each report pins the contract digest. The Codex `Stop` hook rejects a contract edited after verification and can prevent an opted-in task from closing without a current passing report.
 
-That boundary is deliberate. Hashes identify captured evidence; they do not make it true. Unsupported observations return `HOLD` instead of being guessed.
+That boundary is deliberate. The model helps write the test; it does not choose the verdict. Hashes identify captured evidence; they do not make it true. Unsupported observations return `HOLD` instead of being guessed.
+
+An independent adversarial review found a path where absent before/after observations could produce an unsupported result. The verifier now fails closed with `HOLD`, rejects protective-only completion contracts, and carries regression coverage for both paths.
 
 ## How Codex and GPT-5.6 built it
 

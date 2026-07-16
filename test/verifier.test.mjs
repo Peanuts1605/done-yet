@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { verifyOutcome } from "../engine/verifier.mjs";
+import { validateContract, verifyOutcome } from "../engine/verifier.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const FIXTURES = path.join(ROOT, "fixtures", "refund");
@@ -50,4 +50,73 @@ test("a missing retry state returns HOLD rather than an unsupported PASS", async
   ]);
   const report = verifyOutcome({ contract, before, after });
   assert.equal(report.verdict, "HOLD");
+});
+
+test("a missing observation returns HOLD rather than an unsupported verdict", async () => {
+  const [contract, before] = await Promise.all([
+    json(path.join(FIXTURES, "contract.json")),
+    json(path.join(FIXTURES, "before.json")),
+  ]);
+  for (const absent of [undefined, null]) {
+    const report = verifyOutcome({ contract, before, after: absent, agentClaim: "All done" });
+    assert.equal(report.verdict, "HOLD");
+    assert.equal(report.reason, "Required observation is unavailable");
+  }
+});
+
+test("an unobserved before state returns HOLD instead of throwing", async () => {
+  const [contract, after] = await Promise.all([
+    json(path.join(FIXTURES, "contract.json")),
+    json(path.join(FIXTURES, "good", "after.json")),
+  ]);
+  const report = verifyOutcome({ contract, before: undefined, after });
+  assert.equal(report.verdict, "HOLD");
+});
+
+test("a protective-only contract cannot award a PASS on absent state", () => {
+  const protectiveOnly = {
+    id: "protective-only",
+    checks: [
+      { id: "c1", label: "Protected config untouched", assertion: "unchanged", path: "/config/prod" },
+      { id: "c2", label: "Billing untouched", assertion: "unchanged", path: "/billing/rates" },
+    ],
+  };
+  for (const state of [null, {}]) {
+    const report = verifyOutcome({ contract: protectiveOnly, before: state, after: state, agentClaim: "I changed nothing" });
+    assert.notEqual(report.verdict, "PASS");
+    assert.equal(report.verdict, "HOLD");
+  }
+});
+
+test("a contract with no positive assertion is not executable", () => {
+  const errors = validateContract({
+    id: "protective-only",
+    checks: [{ id: "c1", assertion: "unchanged", path: "/config/prod" }],
+  });
+  assert.ok(errors.some((error) => error.includes("non-protective assertion")));
+});
+
+test("malformed contract structures return HOLD instead of throwing", () => {
+  for (const checks of [{}, "not-an-array"]) {
+    const report = verifyOutcome({ contract: { id: "malformed", checks }, before: {}, after: {} });
+    assert.equal(report.verdict, "HOLD");
+    assert.equal(report.reason, "Contract is not executable");
+  }
+});
+
+test("invalid contract pointers return HOLD before evaluation", () => {
+  const contracts = [
+    { id: "bad-path", checks: [{ id: "c1", assertion: "equals", path: "not-a-pointer", expected: true }] },
+    { id: "bad-relation", checks: [{ id: "c1", assertion: "relation", path: "/left" }] },
+    {
+      id: "bad-retry-path",
+      checks: [{ id: "c1", assertion: "exists", path: "/result" }],
+      retryStablePaths: ["not-a-pointer"],
+    },
+  ];
+  for (const contract of contracts) {
+    const report = verifyOutcome({ contract, before: {}, after: {} });
+    assert.equal(report.verdict, "HOLD");
+    assert.equal(report.reason, "Contract is not executable");
+  }
 });

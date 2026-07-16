@@ -14,7 +14,7 @@
 
 Agent transcripts are useful for understanding what an agent attempted, but a confident completion message is not proof that the requested outcome happened. A refund can post while its helpdesk ticket stays open. A retry after a timeout can create a duplicate. The wrong record can change while the agent still says "done."
 
-Done Yet? starts from one practical question: after an agent acts, do the systems now satisfy the user's actual acceptance criteria?
+Done Yet? starts from one practical question: after an agent acts, do the systems now satisfy the user's actual acceptance criteria? It is design by contract applied to agent side effects at the closeout boundary.
 
 ## What it does
 
@@ -29,7 +29,7 @@ The Build Week proof has two layers. A real filesystem observer checks an actual
 ## How a judge can test it
 
 1. Run `npm run demo:repo`. No edit receives `FAIL`, the right edit plus collateral configuration change receives `FAIL`, and the repaired stable retry receives `PASS 6/6`.
-2. Open the live console and select **Partial commit**. The refund exists, but the ticket is still open and unlinked, so the result is `FAIL 9/11`.
+2. Open the live console. It starts on **False success**: the agent confidently claims completion, but observed state is unchanged, so the result is `FAIL 5/11`.
 3. Switch to **Failed only**, inspect the two missed postconditions, and open the result JSON.
 4. Select **Timeout after commit**. The transport reported a timeout, but canonical state satisfies all 11 checks, so the result is `PASS 11/11`.
 
@@ -39,7 +39,7 @@ No account, key, database, or customer data is required.
 
 The project has one verification engine shared by the CLI, tests, generated demo data, and React judge console. The engine supports explicit `exists`, `equals`, `count`, `relation`, `unchanged`, and retry-stability assertions over JSON-pointer paths. A Codex plugin packages a `done-yet` skill and an opt-in `Stop` hook that requires a current passing report only in projects that contain an active Done Yet? contract.
 
-Codex was used to research the challenge and adjacent tools, narrow the product from a broad trust dashboard to a postcondition loop, implement and test the verifier, filesystem observer, plugin, and console, generate adversarial fixtures, run visual QA, deploy the demo, and prepare the submission. GPT-5.6's product role is semantic: translate natural-language intent into a reviewable typed contract and help explain or repair failures. The model does not award its own verdict; deterministic checks do.
+Codex was used to research the challenge and adjacent tools, narrow the product from a broad trust dashboard to a postcondition loop, implement and test the verifier, filesystem observer, plugin, and console, generate adversarial fixtures, run visual QA, deploy the demo, and prepare the submission. GPT-5.6's product role is semantic: translate natural-language intent into a human-diffable typed contract before execution and help explain or repair failures. Deterministic checks award the verdict; the report pins the contract digest, and the Stop hook rejects a contract edited after verification.
 
 The key decisions were deliberate: an opt-in hook rather than a global gate, a visible `HOLD` for missing evidence, timeout-after-commit as a first-class case, and one bounded real repository observer instead of overstating the synthetic helpdesk as a production connector. The primary build session is `019ee0dc-d43c-7160-82ca-0cf8120952a8`.
 
@@ -57,6 +57,7 @@ Timeout ambiguity was another useful edge case. A failed transport does not nece
 - Six reproducible fixtures make the claim judgeable in under two minutes.
 - The Codex integration is opt-in, leaves unrelated projects untouched, and has an automated Stop-hook lifecycle test.
 - The real repository proof and synthetic adversarial gallery both run locally with no credentials.
+- An independent adversarial audit found and closed a false-PASS path for absent observations; regression coverage now requires `HOLD` when evidence is unavailable.
 
 ## What we learned
 

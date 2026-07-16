@@ -31,7 +31,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   min-height: 100vh;
   background: var(--surface);
   display: grid;
-  grid-template-rows: 64px minmax(610px, 1fr) auto auto;
+  grid-template-rows: 76px minmax(610px, 1fr) auto auto;
 }
 
 .app-header {
@@ -48,7 +48,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .brand-group { display: flex; align-items: center; gap: 20px; min-width: 0; }
+.brand-lockup { display: grid; gap: 4px; min-width: 0; }
 .wordmark { font-size: 25px; line-height: 1; font-weight: 760; color: #0e1417; white-space: nowrap; }
+.tagline { margin: 0; color: var(--muted); font-size: 11px; font-weight: 560; line-height: 1.2; white-space: nowrap; }
 .header-divider { height: 28px; width: 1px; background: var(--line); }
 .fixture-switcher { display: inline-flex; align-items: center; color: var(--ink); padding: 8px 4px; }
 .provenance { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line); border-radius: 4px; padding: 6px 9px; color: #39464c; font-size: 13px; white-space: nowrap; }
@@ -243,6 +245,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 @media (max-width: 520px) {
   .wordmark { font-size: 21px; }
+  .brand-group { flex: 1; }
+  .fixture-switcher { display: none; }
+  .tagline { max-width: 220px; white-space: normal; font-size: 10px; }
   .app-header .button { width: 38px; padding: 0; font-size: 0; }
   .claim-section blockquote { width: 100%; }
   .state-table table { min-width: 100%; }
