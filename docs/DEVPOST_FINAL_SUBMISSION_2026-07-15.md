@@ -4,9 +4,11 @@
 
 - Status: `SUBMITTED`
 - Submitted: `2026-07-16T02:05:45Z`
+- Story reconciled after Fulcro QA: `2026-07-16T05:18:04Z`
 - Devpost: https://devpost.com/software/done-yet
 - Submission ID: `1087865-done-yet`
 - Confirmation: `Project submitted!`
+- Reconciliation proof: public page retained `Submitted to OpenAI Build Week` and displayed the patched story.
 
 ## Project name
 

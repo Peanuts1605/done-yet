@@ -16,6 +16,8 @@ Decision: `PASS`
 | Real filesystem proof | unchanged: FAIL 5/6, FAIL 5/6, PASS 6/6 |
 | Generated `demo.json` | byte-identical to submitted fixture data |
 | Malformed contract probes | `HOLD`, no exception |
+| Cloudflare production deployment | `4d075435-277f-4a90-951d-db8f55d6035b` |
+| Public alias | https://done-yet.pages.dev/ verified on patched assets |
 
 ## Browser QA
 

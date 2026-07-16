@@ -4,7 +4,7 @@ Receipt ID: `MAG-DONE-YET-FULCRO-PATCH-2026-07-16`
 Agent: `ORION_L`
 Reviewer: `Fulcro (Claude)`
 Date: `2026-07-16`
-Status: `LOCAL_VERIFIED_PENDING_PUBLIC_DEPLOY`
+Status: `PUBLIC_AND_DEVPOST_VERIFIED_PENDING_SHARED_CLOSEOUT`
 Decision: `SHIP_FULCRO_PATCH_AND_KEEP_ENTRY_SUBMITTED`
 
 ## Artifact
@@ -49,8 +49,12 @@ The judge console now opens on **False success** and shows the product tagline i
 - Demo: https://done-yet.pages.dev/
 - Repository: https://github.com/Peanuts1605/done-yet
 - Video: https://youtu.be/fCkm2LJgihE
-- Commit: `PENDING`
-- Public deploy verification: `PENDING`
+- Commit: `7b0d3c3b1e7780dbc42f9f5c5f81040fd7b21da2`
+- Cloudflare deployment: `4d075435-277f-4a90-951d-db8f55d6035b`
+- Immutable deployment: https://4d075435.done-yet.pages.dev/
+- Public deploy verification: `PASS` - main alias served the patched bundle and Playwright confirmed the tagline, False success cold open, `FAIL 5/11`, and zero console errors.
+- Devpost story reconciliation: `PASS` at `2026-07-16T05:18:04Z` - public story includes the design-by-contract lineage, False success cold open, digest pinning, 19-test count, and independent audit note.
+- Submission state after reconciliation: `SUBMITTED` - public page retained `Submitted to OpenAI Build Week`.
 
 ## Shared proof
 
