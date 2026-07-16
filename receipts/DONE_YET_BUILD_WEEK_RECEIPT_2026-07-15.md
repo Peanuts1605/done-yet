@@ -3,8 +3,8 @@
 - Receipt ID: `MAG-DONE-YET-BUILD-WEEK-2026-07-15`
 - Agent: Orion_L, Codex Desktop on Leo
 - Created: `2026-07-15T15:22:38Z`
-- Status: `PARTIAL_READY_TO_SUBMIT`
-- Decision: `PROCEED_TO_SUBMISSION`
+- Status: `SUBMITTED`
+- Decision: `SUBMIT_AND_HOLD_SURFACE_STABLE`
 
 ## Artifact
 
@@ -27,6 +27,9 @@
 - Live console: https://done-yet.pages.dev/
 - GitHub: https://github.com/Peanuts1605/done-yet
 - Public YouTube demo: https://youtu.be/fCkm2LJgihE
+- Devpost submission: https://devpost.com/software/done-yet
+- Devpost submission ID: `1087865-done-yet`
+- Submitted: `2026-07-16T02:05:45Z`
 - Git commit: `efbea56`
 - Codex session ID: `019ee0dc-d43c-7160-82ca-0cf8120952a8`
 
@@ -47,6 +50,7 @@
 - Video frame: 1920 by 1080
 - Video SHA-256: `0ccc847d80f128c90af8eb95cd688d9779e3906f88767b56bae4c0a5d6ae22cc`
 - Final `npm run check` rerun: passed on 2026-07-15
+- Post-submission `npm run check` rerun: passed on 2026-07-16; 13 tests, lint, and production build passed
 - Thumbnail frame: 1280 by 720
 - Thumbnail SHA-256: `67d8ec8801c43b644171a3fb8de65eb9d4cd194e16da6e44b237ba0731ff8abc`
 - YouTube publication: passed on 2026-07-15
@@ -56,10 +60,18 @@
 
 Fulcro is Claude. The live demo and repository were sent to Fulcro/Claude in Slack. A response has not arrived yet, so no Fulcro verdict is claimed.
 
+## Submission proof
+
+- Devpost confirmation: `Project submitted!`
+- Hackathon association: `Submitted to OpenAI Build Week`
+- Devpost edit window: available until `2026-07-21 20:00 EDT`
+- Required form fields, public video, project gallery, repository, judge instructions, category, and Codex session ID were present at submission.
+
 ## Remaining blockers
 
-- Devpost requires truthful location and birth month/year from Maggy.
-- Final Devpost submission is not yet complete.
+- None for contest entry submission.
+- Participant-credit request remains a separate optional administrative follow-up before its published deadline.
+- Fulcro/Claude review remains optional polish and is not represented as completed.
 
 ## Shared proof
 
@@ -67,6 +79,6 @@ Fulcro is Claude. The live demo and repository were sent to Fulcro/Claude in Sla
 - Notion: https://app.notion.com/p/39eb143d291781328efedfd0346ee4c4
 - Drive mirror update: 7 current artifact files copied and hash-verified on 2026-07-15
 - Notion readback: verified with the public video, real workspace proof, 13-test result, and pending Fulcro state
-- Shared closeout: `COMPLETE_FOR_READY_TO_SUBMIT_STATE`
+- Shared closeout: `PENDING_FINAL_SUBMISSION_RECONCILIATION`
 
-The durable ready-to-submit evidence is reconciled. The contest submission itself remains partial until the Devpost form is completed and submitted.
+The contest entry is submitted. Final shared closeout requires the updated artifact and receipt to be hash-verified in Drive, the Notion pointer to be patched with the Devpost submission, and this receipt to be re-mirrored after reconciliation.

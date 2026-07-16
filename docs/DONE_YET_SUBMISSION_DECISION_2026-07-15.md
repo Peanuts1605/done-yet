@@ -2,7 +2,7 @@
 
 ## Decision
 
-`PROCEED_TO_SUBMISSION`
+`SUBMITTED_AND_HOLD_SURFACE_STABLE`
 
 Done Yet? is a working, public, judgeable Developer Tools entry. Its narrow claim is supported by one deterministic verifier, a real workspace observer, a three-result live filesystem proof, six synthetic adversarial scenarios, a tested Codex closeout hook, and a public console.
 
@@ -25,11 +25,11 @@ Done Yet? does not score agent confidence or claim universal trust. It checks wh
 
 ## Submission state
 
-The entry is ready to submit but is not yet submitted. Remaining external actions are:
+The entry was submitted to OpenAI Build Week on `2026-07-16T02:05:45Z`:
 
-1. finish Devpost eligibility fields with the owner's location and birth month/year;
-2. attach the public YouTube URL and Codex session ID;
-3. reconcile Fulcro/Claude's independent review when it arrives;
-4. submit the final Devpost form.
+- Devpost: https://devpost.com/software/done-yet
+- Submission ID: `1087865-done-yet`
+- Confirmation: `Project submitted!`
+- Edit window: through July 21, 2026 at 8:00 PM EDT
 
-Optional Forge isolation and GitHub Actions must not delay submission.
+Hold the product surface stable. Participant credits, Fulcro/Claude review, Forge isolation, and GitHub Actions are separate follow-ups and must not disturb the submitted proof.

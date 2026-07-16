@@ -17,18 +17,18 @@
 
 ## Required before submission
 
-- [ ] Finish Devpost registration with truthful location and birth month/year
+- [x] Finish Devpost registration with truthful location and birth month/year
 - [ ] Request participant credits before July 17 at noon PT, if registration is eligible
 - [x] Record and caption the 1:48 demo using `docs/DEMO_SCRIPT.md`
 - [x] Upload the final MP4 to YouTube as a private draft
 - [x] Prepare a 1280x720 product-based YouTube thumbnail
 - [x] Publish the final video publicly: https://youtu.be/fCkm2LJgihE
-- [ ] Attach the public YouTube URL to Devpost
+- [x] Attach the public YouTube URL to Devpost
 - [x] Verify and document the primary build Session ID as `019ee0dc-d43c-7160-82ca-0cf8120952a8`
-- [ ] Paste the recorded Session ID into the Devpost `/feedback` field
-- [ ] Add final screenshots to the Devpost project
-- [ ] Paste and proofread `docs/SUBMISSION_DRAFT.md`
-- [ ] Submit before July 21, 2026 at 5:00 PM PT
+- [x] Paste the recorded Session ID into the Devpost `/feedback` field
+- [x] Add final screenshots to the Devpost project
+- [x] Paste and proofread `docs/DEVPOST_FINAL_SUBMISSION_2026-07-15.md`
+- [x] Submit before July 21, 2026 at 5:00 PM PT: https://devpost.com/software/done-yet
 
 ## Independent review and optional polish
 
