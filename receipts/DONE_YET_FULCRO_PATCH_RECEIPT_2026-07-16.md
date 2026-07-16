@@ -4,7 +4,7 @@ Receipt ID: `MAG-DONE-YET-FULCRO-PATCH-2026-07-16`
 Agent: `ORION_L`
 Reviewer: `Fulcro (Claude)`
 Date: `2026-07-16`
-Status: `PUBLIC_AND_DEVPOST_VERIFIED_PENDING_SHARED_CLOSEOUT`
+Status: `COMPLETE_SHARED_CLOSEOUT`
 Decision: `SHIP_FULCRO_PATCH_AND_KEEP_ENTRY_SUBMITTED`
 
 ## Artifact
@@ -58,7 +58,8 @@ The judge console now opens on **False success** and shows the product tagline i
 
 ## Shared proof
 
-- Drive path: `PENDING`
-- Drive mirror run: `PENDING`
-- Notion URL: `PENDING`
-- Reconciled receipt hash: `PENDING`
+- Drive path: `/Users/alfredthebot/Library/CloudStorage/GoogleDrive-maggytatiana@gmail.com/My Drive/TMN_NAUMIO_HQ/06_DELIVERY/MAG-DONE-YET-FULCRO-PATCH-2026-07-16`
+- Initial Drive mirror run: `20260716T051902853Z` - six files copied with matching SHA-256 hashes.
+- Notion URL: https://app.notion.com/p/39eb143d291781328efedfd0346ee4c4
+- Notion state: `SUBMITTED_AND_PATCH_VERIFIED`; verified Drive path and patch proof recorded.
+- Reconciled receipt mirror: the latest `MIRROR_MANIFEST.json` in the delivery folder records the final receipt copy and SHA-256 hash after this reconciliation.
